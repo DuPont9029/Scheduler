@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creazione Eventi</title>
+  <link rel="stylesheet" href="./clock.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      text-align: center;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #1d1d1d;
+      color: #ffffff;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .event-list {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .event {
+      margin-bottom: 10px;
+    }
+
+    .event-name {
+      font-weight: bold;
+    }
+
+    .event-time {
+      font-style: italic;
+      color: #999999;
+    }
+
+    .download-link {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Creazione Eventi</h1>
+    <label for="event-name">Nome:</label>
+    <input type="text" id="event-name" placeholder="Nome evento" required>
+    <label for="event-day">Giorno:</label>
+    <select id="event-day" required>
+      <option value="" disabled selected>Seleziona un giorno</option>
+      <option value="Lunedì">Lunedì</option>
+      <option value="Martedì">Martedì</option>
+      <option value="Mercoledì">Mercoledì</option>
+      <option value="Giovedì">Giovedì</option>
+      <option value="Venerdì">Venerdì</option>
+      <option value="Sabato">Sabato</option>
+      <option value="Domenica">Domenica</option>
+    </select>
+    <label for="event-start">Inizio:</label>
+    <input type="text" id="event-start" placeholder="Ora inizio" required>
+    <label for="event-end">Fine:</label>
+    <input type="text" id="event-end" placeholder="Ora fine" required>
+    <label for="event-location">Posto:</label>
+    <input type="text" id="event-location" placeholder="Luogo dell'evento" required>
+    <button onclick="addEvent()">Aggiungi Evento</button>
+    <div class="event-list" id="event-list">
+
+    </div>
+    <a href="#" class="download-link" id="download-link" download="eventi.json">Scarica JSON</a>
+  </div>
+
+  <script src="./clockscript.js"></script>
+  <script src="./otherscript.js"></script>
+</body>
+
+</html>
+
