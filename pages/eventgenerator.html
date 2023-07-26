@@ -1,121 +1,286 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creazione Eventi</title>
-  <link rel="stylesheet" href="../src/clock.css"> <!-- clock.css --> 
-  <link rel="icon" type="image/x-icon" href="../src/favicon.png"> <!-- favicon.png -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      text-align: center;
-      margin: 0;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    input[type="text"],
-    select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #1d1d1d;
-      color: #ffffff;
-    }
-
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .event-list {
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .event {
-      margin-bottom: 10px;
-    }
-
-    .event-name {
-      font-weight: bold;
-    }
-
-    .event-time {
-      font-style: italic;
-      color: #999999;
-    }
-
-    .download-link {
-      display: block;
-      margin-top: 20px;
-      text-decoration: none;
-      color: #007bff;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Creazione Eventi</h1>
-    <label for="event-name">Nome:</label>
-    <input type="text" id="event-name" placeholder="Nome evento" required>
-    <label for="event-day">Giorno:</label>
-    <select id="event-day" required>
-      <option value="" disabled selected>Seleziona un giorno</option>
-      <option value="Lunedì">Lunedì</option>
-      <option value="Martedì">Martedì</option>
-      <option value="Mercoledì">Mercoledì</option>
-      <option value="Giovedì">Giovedì</option>
-      <option value="Venerdì">Venerdì</option>
-      <option value="Sabato">Sabato</option>
-      <option value="Domenica">Domenica</option>
-    </select>
-    <label for="event-start">Inizio:</label>
-    <input type="text" id="event-start" placeholder="Ora inizio" required>
-    <label for="event-end">Fine:</label>
-    <input type="text" id="event-end" placeholder="Ora fine" required>
-    <label for="event-location">Posto:</label>
-    <input type="text" id="event-location" placeholder="Luogo dell'evento" required>
-    <button onclick="addEvent()">Aggiungi Evento</button>
-    <div class="event-list" id="event-list">
-
-    </div>
-    <a href="#" class="download-link" id="download-link" download="eventi.json">Scarica JSON</a>
-  </div>
-
-  <script src="../src/clockscript.js"></script> <!-- clockscript.js -->
-  <script src="../src/otherscript.js"></script> <!-- otherscript.js -->
-</body>
-
-</html>
-
+<!DOCTYPE html> 
+ <html lang="en"> 
+  
+ <head> 
+   <meta charset="UTF-8"> 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+   <title>Creazione Eventi</title> 
+   <!-- 
+   <link rel="stylesheet" href="https://cdn.jsde/src/clock.css"> clock.css  
+   --> 
+  
+   <link rel="stylesheet" href="../src/clock.css">  
+  
+   <link rel="icon" type="image/x-icon" href="../src/favicon.png"> <!-- favicon.png --> 
+   <style> 
+     body { 
+       font-family: Arial, sans-serif; 
+       background-color: #121212; 
+       color: #ffffff; 
+       text-align: center; 
+       margin: 0; 
+     } 
+  
+     h1 { 
+       margin-bottom: 20px; 
+     } 
+  
+     .container { 
+       max-width: 500px; 
+       margin: 0 auto; 
+       padding: 20px; 
+     } 
+  
+     .form-input { 
+       width: 100%; 
+       padding: 10px; 
+       border: 1px solid #ddd; 
+       border-radius: 5px; 
+       background-color: #1d1d1d; 
+       color: #ffffff; 
+       margin-bottom: 10px; 
+     } 
+  
+     label { 
+       display: block; 
+     } 
+  
+     button { 
+       display: block; 
+       width: 100%; 
+       padding: 10px; 
+       margin-top: 20px; 
+       border: none; 
+       border-radius: 5px; 
+       background-color: #007bff; 
+       color: #ffffff; 
+       cursor: pointer; 
+     } 
+  
+     .button-add-event { 
+   background-color: #007bff; 
+ } 
+  
+ /* Bottone "Salva JSON" */ 
+ .button-save-json { 
+   background-color: #28a745; 
+ } 
+  
+ /* Bottone "Carica JSON" */ 
+ .button-load-json { 
+   background-color: #ffc107; 
+ } 
+  
+ /* Bottone "Elimina" */ 
+ .button-delete { 
+   background-color: #dc3545; 
+ } 
+  
+  
+  
+     button:hover { 
+       background-color: #0056b3; 
+     } 
+  
+     .event-list { 
+       margin-top: 20px; 
+       text-align: left; 
+     } 
+  
+     .event { 
+       margin-bottom: 10px; 
+     } 
+  
+     .event-name { 
+       font-weight: bold; 
+     } 
+  
+     .event-time { 
+       font-style: italic; 
+       color: #999999; 
+     } 
+  
+     .event-location { 
+       color: #ffffff; 
+     } 
+  
+     .delete-button { 
+       background-color: #ff3b3b; 
+     } 
+  
+     .delete-button:hover { 
+       background-color: #c80000; 
+     } 
+  
+     .download-link { 
+       display: block; 
+       margin-top: 20px; 
+       text-decoration: none; 
+       color: #007bff; 
+     } 
+  
+     .section-divider { 
+       margin: 20px 0; 
+       border-bottom: 1px solid #ddd; 
+     } 
+  
+  
+   </style> 
+ </head> 
+  
+ <body> 
+   <div class="container"> 
+     <!-- Inizio sezione 1 --> 
+     <h1>Creazione Eventi</h1> 
+     <label for="event-name">Nome:</label> 
+     <input type="text" id="event-name" class="form-input" placeholder="Nome evento" required> 
+     <label for="event-day">Giorno:</label> 
+     <select id="event-day" class="form-input" required> 
+       <option value="" disabled selected>Seleziona un giorno</option> 
+       <option value="Lunedì">Lunedì</option> 
+       <option value="Martedì">Martedì</option> 
+       <option value="Mercoledì">Mercoledì</option> 
+       <option value="Giovedì">Giovedì</option> 
+       <option value="Venerdì">Venerdì</option> 
+       <option value="Sabato">Sabato</option> 
+       <option value="Domenica">Domenica</option> 
+     </select> 
+     <label for="event-start">Inizio:</label> 
+     <input type="text" id="event-start" class="form-input" placeholder="Ora inizio" required> 
+     <label for="event-end">Fine:</label> 
+     <input type="text" id="event-end" class="form-input" placeholder="Ora fine" required> 
+     <label for="event-location">Posto:</label> 
+     <input type="text" id="event-location" class="form-input" placeholder="Luogo dell'evento" required> 
+     <button onclick="createNewEvent()">Aggiungi Evento</button> 
+     <button onclick="saveEvents()" class="button-save-json">Salva JSON</button> 
+     <!-- Fine sezione 1 --> 
+  
+     <!-- <br><br><br>  Spazio tra le sezioni --> 
+  
+     <div class="section-divider"></div> 
+  
+  
+     <!-- Inizio sezione 2 --> 
+     <div class="event-list" id="event-list"> 
+       <!-- Lista degli eventi visualizzati --> 
+     </div> 
+     <a href="#" class="download-link" id="download-link" download="eventi.json">Carica JSON</a> </br> 
+     <input type="file" id="file-input" class="form-input" accept=".json" /> 
+     <button onclick="loadEvents()" class="button-load-json">Carica JSON</button> 
+     <!-- Fine sezione 2 --> 
+   </div> 
+  
+ <!-- 
+   <script src="https://cdn.jsdelivr.net/gh/DuPont9029/Scheduler/src/clockscript.js"></script> clockscript.js  
+   <script src="https://cdn.jsdelivr.net/gh/DuPont9029/Scheduler/src/otherscript.js"></script>  otherscript.js 
+ --> 
+  
+     <script src="../src/clockscript.js"></script> <!-- clockscript.js -->  
+    <script src="../src/otherscript.js"></script> <!-- otherscript.js --> 
+  
+   <script> 
+     // Script JS per le funzioni della pagina 
+     var eventsData = []; // Array per memorizzare gli eventi 
+  
+     // Funzione per caricare il JSON degli eventi 
+     function loadEvents() { 
+       var fileInput = document.getElementById("file-input"); 
+       var file = fileInput.files[0]; 
+       if (file) { 
+         var reader = new FileReader(); 
+         reader.onload = function (event) { 
+           try { 
+             eventsData = JSON.parse(event.target.result); 
+             displayEvents(); 
+           } catch (error) { 
+             alert("Errore durante il caricamento del file JSON. Assicurati che il formato sia corretto."); 
+           } 
+         }; 
+         reader.readAsText(file); 
+       } 
+     } 
+  
+     // Funzione per creare un nuovo evento vuoto 
+     function createNewEvent() { 
+       var eventName = document.getElementById("event-name").value; 
+       var eventDay = document.getElementById("event-day").value; 
+       var eventStart = document.getElementById("event-start").value; 
+       var eventEnd = document.getElementById("event-end").value; 
+       var eventLocation = document.getElementById("event-location").value; 
+  
+       // Crea un oggetto per rappresentare l'evento 
+       var eventObj = { 
+         nome: eventName, 
+         giorno: eventDay, 
+         inizio: eventStart, 
+         fine: eventEnd, 
+         posto: eventLocation, 
+       }; 
+  
+       // Aggiungi il nuovo evento all'array degli eventi 
+       eventsData.push(eventObj); 
+  
+       // Visualizza gli eventi aggiornati nella lista 
+       displayEvents(); 
+  
+       // Pulisci i campi del form dopo aver aggiunto l'evento 
+       document.getElementById("event-name").value = ""; 
+       document.getElementById("event-day").value = ""; 
+       document.getElementById("event-start").value = ""; 
+       document.getElementById("event-end").value = ""; 
+       document.getElementById("event-location").value = ""; 
+     } 
+  
+     // Funzione per eliminare un evento dalla lista 
+     function deleteEvent(button) { 
+       var eventListDiv = document.getElementById("event-list"); 
+       var eventDiv = button.parentNode; 
+       var index = Array.from(eventListDiv.children).indexOf(eventDiv); 
+  
+       if (index !== -1) { 
+         eventsData.splice(index, 1); 
+         displayEvents(); 
+       } 
+     } 
+  
+     // Funzione per visualizzare gli eventi nella lista 
+  
+  
+  
+  
+  
+  
+  
+ function displayEvents() { 
+   var eventListDiv = document.getElementById("event-list"); 
+   eventListDiv.innerHTML = ""; // Svuota la lista degli eventi prima di caricare i nuovi dati 
+  
+   eventsData.forEach(function (eventObj) { 
+     var eventDiv = document.createElement("div"); 
+     eventDiv.classList.add("event"); 
+     eventDiv.innerHTML = 
+       '<span class="event-name">' + eventObj.nome + '</span> - ' + 
+       '<span class="event-time">' + eventObj.inizio + ' to ' + eventObj.fine + '</span> - ' + 
+       '<span class="event-day">' + eventObj.giorno + '</span> - ' + // Corretto qui 
+       '<span class="event-location">' + eventObj.posto + '</span>' + 
+       '<button class="delete-button" onclick="deleteEvent(this)">Elimina</button>'; 
+     eventListDiv.appendChild(eventDiv); 
+   }); 
+ } 
+  
+  
+  
+     // Funzione per scaricare il JSON contenente gli eventi aggiornati 
+     function saveEvents() { 
+       var jsonData = JSON.stringify(eventsData, null, 2); 
+       var blob = new Blob([jsonData], { type: "application/json" }); 
+       var url = URL.createObjectURL(blob); 
+       var link = document.createElement("a"); 
+       link.href = url; 
+       link.download = "eventi_aggiornati.json"; 
+       link.click(); 
+     } 
+   </script> 
+ </body> 
+  
+ </html>
