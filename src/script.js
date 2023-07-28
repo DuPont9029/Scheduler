@@ -123,7 +123,7 @@ return date;
         compareAppointments(json);
       } catch (error) {
         console.error('Errore durante la lettura del file JSON:', error);
-        alert("Errore durante la lettura del file JSON: ", error);
+        alert("Errore durante la lettura del file JSON");
       }
     };
 
