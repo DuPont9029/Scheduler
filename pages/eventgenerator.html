@@ -5,10 +5,7 @@
    <meta charset="UTF-8"> 
    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
    <title>Creazione Eventi</title> 
-   <!-- 
-   <link rel="stylesheet" href="https://cdn.jsde/src/clock.css"> clock.css  
-   --> 
-  
+   <link rel="stylesheet" href="../src/title.css">
    <link rel="stylesheet" href="../src/clock.css">  
   
    <link rel="icon" type="image/x-icon" href="../src/favicon.png"> <!-- favicon.png --> 
@@ -24,6 +21,15 @@
      h1 { 
        margin-bottom: 20px; 
      } 
+
+     a {
+      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+     }
+
+     .white {
+      color: #ffffff;
+     }
   
      .container { 
        max-width: 500px; 
@@ -131,7 +137,8 @@
  <body> 
    <div class="container"> 
      <!-- Inizio sezione 1 --> 
-     <h1>Creazione Eventi</h1> 
+     <a href="../index.html" class="centro title white">Creazione Eventi</a>
+
      <label for="event-name">Nome:</label> 
      <input type="text" id="event-name" class="form-input" placeholder="Nome evento" required> 
      <label for="event-day">Giorno:</label> 
